@@ -1,8 +1,15 @@
+import * as fs from "fs";
 import {
   WordCountObject,
   isWordCountObject,
   isWordCountObjectArray,
 } from "./types";
+
+export function getFileAsArray(filepath: string): string[] {
+  // this will need improving!
+  const fileString = fs.readFileSync(filepath, "utf8");
+  return fileString.split(" ");
+}
 
 export function cleanWord(word: string): string {
   if (!word) throw new Error("No word provided");
@@ -12,7 +19,9 @@ export function cleanWord(word: string): string {
   return word.replace(/[^a-zA-Z]/g, "").toLowerCase();
 }
 
-export function sortArrayAlphabetically(wordCountArray: WordCountObject[]) {
+export function sortArrayAlphabetically(
+  wordCountArray: WordCountObject[],
+): WordCountObject[] {
   if (!isWordCountObjectArray(wordCountArray))
     throw new Error("Incorrect input type");
   const sortedArray = wordCountArray.map((obj) => ({ ...obj }));

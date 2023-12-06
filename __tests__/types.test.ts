@@ -2,7 +2,7 @@ import {
   WordCountObject,
   isWordCountObject,
   isWordCountObjectArray,
-} from "../src/types";
+} from "../types";
 
 describe("isWordCountObject()", () => {
   it("returns true for correct object type", () => {

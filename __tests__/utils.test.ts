@@ -1,9 +1,9 @@
-import { WordCountObject } from "../src/types";
+import { WordCountObject } from "../types";
 import {
   cleanWord,
   formatObjectAsArray,
   sortArrayAlphabetically,
-} from "../src/utils";
+} from "../utils";
 
 describe("cleanWord()", () => {
   it("returns a correctly formatted word", () => {
