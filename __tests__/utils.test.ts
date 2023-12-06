@@ -1,10 +1,10 @@
-import { WordCountObject } from "../types";
+import { WordCountObject } from "../src/types";
 import {
   cleanWord,
   formatObjectAsArray,
   getFileAsArray,
   sortArrayAlphabetically,
-} from "../utils";
+} from "../src/utils";
 
 describe("getFileAsArray()", () => {
   it("returns single word array for file containing single word", () => {

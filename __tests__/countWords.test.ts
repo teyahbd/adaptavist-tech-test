@@ -1,4 +1,4 @@
-import countWords from "../countWords";
+import countWords from "../src/countWords";
 
 describe("countWords()", () => {
   it("returns an empty object if passed an empty array", () => {
