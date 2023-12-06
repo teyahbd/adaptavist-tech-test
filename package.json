@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.10",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
@@ -41,7 +42,8 @@
       "project": "./tsconfig.json"
     },
     "rules": {
-      "no-nested-ternary": "off"
+      "no-nested-ternary": "off",
+      "no-plusplus": "off"
     }
   },
   "jest": {
