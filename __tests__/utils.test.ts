@@ -2,9 +2,72 @@ import { WordCountObject } from "../types";
 import {
   cleanWord,
   formatObjectAsArray,
+  getFileAsArray,
   sortArrayAlphabetically,
 } from "../utils";
 
+describe("getFileAsArray()", () => {
+  it("returns single word array for file containing single word", () => {
+    const input = "__tests__/data/single-word.txt";
+    const expected = ["Hello!"];
+
+    const result = getFileAsArray(input);
+
+    expect(result).toHaveLength(1);
+    expect(result).toEqual(expected);
+  });
+  it("returns multi word array for file containing a sentence", () => {
+    const input = "__tests__/data/sentence.txt";
+    const expected = ["Hello!", "This", "is", "a", "lovely", "sentence."];
+
+    const result = getFileAsArray(input);
+
+    expect(result).toHaveLength(6);
+    expect(result).toEqual(expected);
+  });
+  it("returns correct array for file containing an unusually formatted and spaced sentence", () => {
+    const input = "__tests__/data/unusual-sentence.txt";
+    const expected = ["Hello!", "ThiS", "is", "an", ".unUsuaL", "sentence!!"];
+
+    const result = getFileAsArray(input);
+
+    expect(result).toHaveLength(6);
+    expect(result).toEqual(expected);
+  });
+  it("returns correct array for file containing multiple lines", () => {
+    const input = "__tests__/data/multi-line.txt";
+    const expected = [
+      "This",
+      "is",
+      "line",
+      "one!",
+      "This",
+      "is",
+      "line",
+      "two!",
+    ];
+
+    const result = getFileAsArray(input);
+
+    expect(result).toHaveLength(8);
+    expect(result).toEqual(expected);
+  });
+  it("returns correct array for file containing multiple unusually spaced lines", () => {
+    const input = "__tests__/data/unusual-multi-line.txt";
+    const expected = ["hello", "Hello", "hELLo", "!"];
+
+    const result = getFileAsArray(input);
+
+    expect(result).toHaveLength(4);
+    expect(result).toEqual(expected);
+  });
+  it("ERROR: throws error if not passed a filepath", () => {
+    expect(getFileAsArray).toThrow(Error("No filepath provided"));
+  });
+  it("ERROR: throws error if passed an invalid filepath", () => {
+    expect(() => getFileAsArray("/oops.txt")).toThrow();
+  });
+});
 describe("cleanWord()", () => {
   it("returns a correctly formatted word", () => {
     const input = "hello";
