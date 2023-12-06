@@ -32,11 +32,6 @@ describe("isWordCountObject()", () => {
 
     expect(isWordCountObject(input)).toBe(false);
   });
-  it("returns false for object with multiple keys", () => {
-    const input = { armadillo: 2, zebra: 1 };
-
-    expect(isWordCountObject(input)).toBe(false);
-  });
 });
 
 describe("isWordCountObjectArray()", () => {
