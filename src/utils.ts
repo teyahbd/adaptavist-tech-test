@@ -47,6 +47,8 @@ export function sortArrayAlphabetically(
 export function formatObjectAsArray(object: {
   [key: string]: number;
 }): WordCountObject[] {
+  if (object && Object.keys(object).length < 1) return [];
+
   if (!isWordCountObject(object)) throw new Error("Incorrect input type");
 
   return Object.keys(object).map((key) => ({ [key]: object[key] }));

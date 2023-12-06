@@ -208,6 +208,14 @@ describe("formatObjectAsArray()", () => {
 
     expect(result).toEqual(expected);
   });
+  it("returns empty array if passed an empty object", () => {
+    const input = {};
+    const expected: WordCountObject[] = [];
+
+    const result = formatObjectAsArray(input);
+
+    expect(result).toEqual(expected);
+  });
   it("ERROR: throws error if not passed WordCountObject", () => {
     const inputA = { armadillo: "1" };
     const inputB = "armadillo";
