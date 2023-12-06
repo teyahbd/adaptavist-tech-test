@@ -1,4 +1,8 @@
-import { WordCountObject, isWordCountObjectArray } from "./types";
+import {
+  WordCountObject,
+  isWordCountObject,
+  isWordCountObjectArray,
+} from "./types";
 
 export function cleanWord(word: string): string {
   if (!word) throw new Error("No word provided");
@@ -8,9 +12,7 @@ export function cleanWord(word: string): string {
   return word.replace(/[^a-zA-Z]/g, "").toLowerCase();
 }
 
-export function sortWordCountArrayAlphabetically(
-  wordCountArray: WordCountObject[],
-) {
+export function sortArrayAlphabetically(wordCountArray: WordCountObject[]) {
   if (!isWordCountObjectArray(wordCountArray))
     throw new Error("Incorrect input type");
   const sortedArray = wordCountArray.map((obj) => ({ ...obj }));
@@ -21,4 +23,12 @@ export function sortWordCountArrayAlphabetically(
 
     return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
   });
+}
+
+export function formatObjectAsArray(object: {
+  [key: string]: number;
+}): WordCountObject[] {
+  if (!isWordCountObject(object)) throw new Error("Incorrect input type");
+
+  return Object.keys(object).map((key) => ({ [key]: object[key] }));
 }
