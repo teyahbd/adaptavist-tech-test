@@ -6,13 +6,23 @@ import {
 } from "./types";
 
 export function getFileAsArray(filepath: string): string[] {
-  // this will need improving!
+  if (!filepath) throw new Error("No filepath provided");
+
   const fileString = fs.readFileSync(filepath, "utf8");
-  return fileString.split(" ");
+
+  const removedNewLines = fileString.split("\n");
+
+  return removedNewLines.reduce(
+    (accumulator: string[], currentValue: string) => {
+      const words = currentValue.split(" ").filter((word) => word !== "");
+      return [...accumulator, ...words];
+    },
+    [] as string[],
+  );
 }
 
 export function cleanWord(word: string): string {
-  if (!word) throw new Error("No word provided");
+  if (!word && word !== "") throw new Error("No word provided");
 
   if (typeof word !== "string") throw new Error("Incorrect input type");
 
