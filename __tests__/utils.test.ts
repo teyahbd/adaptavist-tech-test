@@ -1,4 +1,5 @@
-import cleanWord from "../src/utils";
+import { WordCountObject } from "../src/types";
+import { cleanWord, sortWordCountArrayAlphabetically } from "../src/utils";
 
 describe("cleanWord()", () => {
   it("returns a correctly formatted word", () => {
@@ -65,6 +66,59 @@ describe("cleanWord()", () => {
   });
   it("ERROR: throws error if not passed a string", () => {
     expect(() => cleanWord(43110 as any)).toThrow(
+      Error("Incorrect input type"),
+    );
+  });
+});
+
+describe("sortWordCountArrayAlphabetically()", () => {
+  it("returns correctly ordered array", () => {
+    const input: WordCountObject[] = [{ armadillo: 1 }, { zebra: 2 }];
+
+    const expected: WordCountObject[] = [{ armadillo: 1 }, { zebra: 2 }];
+
+    const result = sortWordCountArrayAlphabetically(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("sorts and returns array of two objects not in alphabetical order", () => {
+    const input: WordCountObject[] = [{ zebra: 1 }, { armadillo: 0 }];
+
+    const expected: WordCountObject[] = [{ armadillo: 0 }, { zebra: 1 }];
+
+    const result = sortWordCountArrayAlphabetically(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("sorts and returns array of more than two objects not in alphabetical order", () => {
+    const input: WordCountObject[] = [
+      { zebra: 1 },
+      { armadillo: 0 },
+      { goose: 5 },
+    ];
+
+    const expected: WordCountObject[] = [
+      { armadillo: 0 },
+      { goose: 5 },
+      { zebra: 1 },
+    ];
+
+    const result = sortWordCountArrayAlphabetically(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("ERROR: throws error if passed argument of incorrect type", () => {
+    const inputA = undefined;
+    const inputB = [{ armadillo: "1" }];
+    const inputC = { armadillo: 1 };
+
+    expect(() => sortWordCountArrayAlphabetically(inputA as any)).toThrow(
+      Error("Incorrect input type"),
+    );
+    expect(() => sortWordCountArrayAlphabetically(inputB as any)).toThrow(
+      Error("Incorrect input type"),
+    );
+    expect(() => sortWordCountArrayAlphabetically(inputC as any)).toThrow(
       Error("Incorrect input type"),
     );
   });
