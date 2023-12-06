@@ -7,6 +7,7 @@ export default function countWords(words: string[]): WordCountObject {
   if (!Array.isArray(words)) throw new Error("Incorrect input type");
   return words.reduce((accumulator, currentValue: string) => {
     const processedWord = cleanWord(currentValue);
+    if (processedWord === "") return accumulator;
 
     if (Object.keys(accumulator).includes(processedWord)) {
       accumulator[processedWord] += 1;

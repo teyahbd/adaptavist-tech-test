@@ -38,6 +38,14 @@ describe("countWords()", () => {
 
     expect(result).toEqual(expected);
   });
+  it("removes any empty strings or lone non-alphabet strings", () => {
+    const input = ["", "armadillo", "?"];
+    const expected = { armadillo: 1 };
+
+    const result = countWords(input);
+
+    expect(result).toEqual(expected);
+  });
   it("ERROR: throws error if not passed argument", () => {
     expect(countWords).toThrow(Error("No input provided"));
   });
