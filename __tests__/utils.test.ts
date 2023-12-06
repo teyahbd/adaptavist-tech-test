@@ -148,10 +148,14 @@ describe("formatObjectAsArray()", () => {
   it("ERROR: throws error if not passed WordCountObject", () => {
     const inputA = { armadillo: "1" };
     const inputB = "armadillo";
+    const inputC = undefined;
     expect(() => formatObjectAsArray(inputA as any)).toThrow(
       Error("Incorrect input type"),
     );
     expect(() => formatObjectAsArray(inputB as any)).toThrow(
+      Error("Incorrect input type"),
+    );
+    expect(() => formatObjectAsArray(inputC as any)).toThrow(
       Error("Incorrect input type"),
     );
   });
