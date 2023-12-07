@@ -13,10 +13,10 @@ npm i
 This project uses `ts-node` so the application can be run with the command
 
 ```
-ts-node app.ts <filename>
+ts-node app.ts < filename >
 ```
 
-where <filename> is the path to the file you wish to count the words of. This repo includes an example file you can run with
+where < filename > is the path to the file you wish to count the words of. This repo includes an example file you can run with
 
 ```
 ts-node app.ts example.txt
