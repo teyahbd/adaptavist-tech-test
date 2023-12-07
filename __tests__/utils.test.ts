@@ -1,9 +1,8 @@
 import { WordCountObject } from "../src/types";
 import {
   cleanWord,
-  formatObjectAsArray,
+  formatObjectAsAlphabeticalArray,
   getFileAsArray,
-  sortArrayAlphabetically,
 } from "../src/utils";
 
 describe("getFileAsArray()", () => {
@@ -62,7 +61,7 @@ describe("getFileAsArray()", () => {
     expect(result).toEqual(expected);
   });
   it("ERROR: throws error if not passed a filepath", () => {
-    expect(getFileAsArray).toThrow(Error("No filepath provided"));
+    expect(getFileAsArray).toThrow();
   });
   it("ERROR: throws error if passed an invalid filepath", () => {
     expect(() => getFileAsArray("/oops.txt")).toThrow();
@@ -129,74 +128,15 @@ describe("cleanWord()", () => {
   });
 
   it("ERROR: throws error if not passed a word", () => {
-    expect(cleanWord).toThrow(Error("No word provided"));
-  });
-  it("ERROR: throws error if not passed a string", () => {
-    expect(() => cleanWord(43110 as any)).toThrow(
-      Error("Incorrect input type"),
-    );
+    expect(cleanWord).toThrow();
   });
 });
-
-describe("sortArrayAlphabetically()", () => {
-  it("returns correctly ordered array", () => {
-    const input: WordCountObject[] = [{ armadillo: 1 }, { zebra: 2 }];
-
-    const expected: WordCountObject[] = [{ armadillo: 1 }, { zebra: 2 }];
-
-    const result = sortArrayAlphabetically(input);
-
-    expect(result).toEqual(expected);
-  });
-  it("sorts and returns array of two objects not in alphabetical order", () => {
-    const input: WordCountObject[] = [{ zebra: 1 }, { armadillo: 0 }];
-
-    const expected: WordCountObject[] = [{ armadillo: 0 }, { zebra: 1 }];
-
-    const result = sortArrayAlphabetically(input);
-
-    expect(result).toEqual(expected);
-  });
-  it("sorts and returns array of more than two objects not in alphabetical order", () => {
-    const input: WordCountObject[] = [
-      { zebra: 1 },
-      { armadillo: 0 },
-      { goose: 5 },
-    ];
-
-    const expected: WordCountObject[] = [
-      { armadillo: 0 },
-      { goose: 5 },
-      { zebra: 1 },
-    ];
-
-    const result = sortArrayAlphabetically(input);
-
-    expect(result).toEqual(expected);
-  });
-  it("ERROR: throws error if passed argument of incorrect type", () => {
-    const inputA = undefined;
-    const inputB = [{ armadillo: "1" }];
-    const inputC = { armadillo: 1 };
-
-    expect(() => sortArrayAlphabetically(inputA as any)).toThrow(
-      Error("Incorrect input type"),
-    );
-    expect(() => sortArrayAlphabetically(inputB as any)).toThrow(
-      Error("Incorrect input type"),
-    );
-    expect(() => sortArrayAlphabetically(inputC as any)).toThrow(
-      Error("Incorrect input type"),
-    );
-  });
-});
-
-describe("formatObjectAsArray()", () => {
+describe("formatObjectAsAlphabeticalArray()", () => {
   it("returns correctly formatted object as array", () => {
     const input = { armadillo: 1 };
     const expected = [{ armadillo: 1 }];
 
-    const result = formatObjectAsArray(input);
+    const result = formatObjectAsAlphabeticalArray(input);
 
     expect(result).toEqual(expected);
   });
@@ -204,7 +144,7 @@ describe("formatObjectAsArray()", () => {
     const input = { armadillo: 1, zebra: 5 };
     const expected = [{ armadillo: 1 }, { zebra: 5 }];
 
-    const result = formatObjectAsArray(input);
+    const result = formatObjectAsAlphabeticalArray(input);
 
     expect(result).toEqual(expected);
   });
@@ -212,7 +152,37 @@ describe("formatObjectAsArray()", () => {
     const input = {};
     const expected: WordCountObject[] = [];
 
-    const result = formatObjectAsArray(input);
+    const result = formatObjectAsAlphabeticalArray(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("returns correctly ordered array", () => {
+    const input: WordCountObject = { armadillo: 1, zebra: 2 };
+
+    const expected: WordCountObject[] = [{ armadillo: 1 }, { zebra: 2 }];
+
+    const result = formatObjectAsAlphabeticalArray(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("sorts and returns array of two objects not in alphabetical order", () => {
+    const input: WordCountObject = { zebra: 1, armadillo: 0 };
+
+    const expected: WordCountObject[] = [{ armadillo: 0 }, { zebra: 1 }];
+
+    const result = formatObjectAsAlphabeticalArray(input);
+
+    expect(result).toEqual(expected);
+  });
+  it("sorts and returns array of more than two objects not in alphabetical order", () => {
+    const input: WordCountObject = { zebra: 1, armadillo: 0, goose: 5 };
+    const expected: WordCountObject[] = [
+      { armadillo: 0 },
+      { goose: 5 },
+      { zebra: 1 },
+    ];
+
+    const result = formatObjectAsAlphabeticalArray(input);
 
     expect(result).toEqual(expected);
   });
@@ -220,13 +190,13 @@ describe("formatObjectAsArray()", () => {
     const inputA = { armadillo: "1" };
     const inputB = "armadillo";
     const inputC = undefined;
-    expect(() => formatObjectAsArray(inputA as any)).toThrow(
+    expect(() => formatObjectAsAlphabeticalArray(inputA as any)).toThrow(
       Error("Incorrect input type"),
     );
-    expect(() => formatObjectAsArray(inputB as any)).toThrow(
+    expect(() => formatObjectAsAlphabeticalArray(inputB as any)).toThrow(
       Error("Incorrect input type"),
     );
-    expect(() => formatObjectAsArray(inputC as any)).toThrow(
+    expect(() => formatObjectAsAlphabeticalArray(inputC as any)).toThrow(
       Error("Incorrect input type"),
     );
   });

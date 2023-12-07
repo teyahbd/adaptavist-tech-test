@@ -1,9 +1,5 @@
 import countWords from "./countWords";
-import {
-  formatObjectAsArray,
-  getFileAsArray,
-  sortArrayAlphabetically,
-} from "./utils";
+import { formatObjectAsAlphabeticalArray, getFileAsArray } from "./utils";
 
 export default function generateWordCount(filepath: string): void {
   if (!filepath) throw new Error("No filepath provided");
@@ -12,9 +8,7 @@ export default function generateWordCount(filepath: string): void {
 
   const wordCount = countWords(wordArray);
 
-  const wordCountArray = formatObjectAsArray(wordCount);
-
-  const sortedWordCountArray = sortArrayAlphabetically(wordCountArray);
+  const sortedWordCountArray = formatObjectAsAlphabeticalArray(wordCount);
 
   sortedWordCountArray.forEach((word) => {
     const key = Object.keys(word)[0];
