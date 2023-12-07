@@ -4,7 +4,7 @@ This repo holds a Node and TypeScript application which reads a file and returns
 
 ## How to run
 
-This project uses `npm` and `Node`. After cloning/forking this repo or unzipping an archive, navigate to the root folder of this project and install the dependencies using
+This project uses `npm` and `Node`. You can clone/fork this repo to run, or you can find an archive of the repo (at the time of writing) in the `tech-test-archive.zip` file. After cloning/forking or unzipping an archive, navigate to the root folder of this project and install the dependencies using
 
 ```
 npm i
