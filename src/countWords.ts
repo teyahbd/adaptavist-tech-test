@@ -5,6 +5,9 @@ export default function countWords(words: string[]): WordCountObject {
   if (!words) throw new Error("No input provided");
 
   if (!Array.isArray(words)) throw new Error("Incorrect input type");
+
+  const wordCountObject: WordCountObject = {};
+
   return words.reduce((accumulator, currentValue: string) => {
     const processedWord = cleanWord(currentValue);
     if (processedWord === "") return accumulator;
@@ -16,5 +19,5 @@ export default function countWords(words: string[]): WordCountObject {
     }
 
     return accumulator;
-  }, {} as WordCountObject);
+  }, wordCountObject);
 }
