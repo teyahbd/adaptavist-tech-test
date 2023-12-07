@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
-    "dev": "ts-node app.ts",
+    "word-count": "ts-node app.ts",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "npx prettier -c .",
@@ -43,7 +43,8 @@
     },
     "rules": {
       "no-nested-ternary": "off",
-      "no-plusplus": "off"
+      "no-plusplus": "off",
+      "no-console": "off"
     }
   },
   "jest": {
